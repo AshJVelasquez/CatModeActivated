@@ -11,28 +11,36 @@ var isUpKeyPressed = false;
 var isDownKeyPressed = false;
 
 class GameCharacter {
-    constructor(x, y, width, height, color, speed) {
+    constructor(x, y, width, height, color, verticalSpeed,horizontalSpeed) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.color = color;
-        this.speed = speed;
+        //this.speed=speed;
+        this.verticalSpeed = verticalSpeed;
+        this.horizontalSpeed = horizontalSpeed;
         this.maxSpeed = 4;
     }
     moveVertically() {
-        if (this.y > screenHeight - 100 || this.y < 50) {
-            this.speed = -this.speed;
+        if (this.y > screenHeight - 30 || this.y < 20) {
+            //this.speed = -this.speed;
+            this.verticalSpeed = -this.verticalSpeed;
         }
-        this.y += this.speed;
+        //this.y += this.speed;
+        this.y += this.verticalSpeed;
     }
     moveHorizontally() {
-        this.x += this.speed;
+        //this.x += this.speed;
+        if (this.x > screenWidth - 30 || this.x < 20) {
+            this.horizontalSpeed = -this.horizontalSpeed;
+        }
+        this.x += this.horizontalSpeed;
     }
 }
 
 /*------Characters-------*/
-var catPlayer = new GameCharacter(40, 300, 30, 30, "rgb(200,100,20)", 0);
+var catPlayer = new GameCharacter(60, 300, 30, 30, "rgb(200,100,20)", 0,0);
 /*--------------------------------*/
 
 
@@ -54,11 +62,11 @@ document.onkeydown = function (event) {
     var keyPressed = event.keyCode;
     if (keyPressed == 39) {
         isRightKeyPressed = true;
-        catPlayer.speed = catPlayer.maxSpeed;
+        catPlayer.horizontalSpeed = catPlayer.maxSpeed;
     }
     else if (keyPressed == 37) {
         isLeftKeyPressed = true;
-        catPlayer.speed = -catPlayer.maxSpeed;
+        catPlayer.horizontalSpeed = -catPlayer.maxSpeed;
     }
     //END Horizonatal
 
@@ -66,11 +74,11 @@ document.onkeydown = function (event) {
     //NOTE Keep an eye on this cause I wonder if the y-axis is different due to the way the canvas is created
     else if (keyPressed == 38) {
         isUpKeyPressed = true;
-        catPlayer.speed = catPlayer.maxSpeed;
+        catPlayer.verticalSpeed = -catPlayer.maxSpeed;
     }
     else if (keyPressed == 40) {
         isDownKeyPressed = true;
-        catPlayer.speed = -catPlayer.maxSpeed;
+        catPlayer.verticalSpeed = catPlayer.maxSpeed;
     }
     //END Vertical
 };
@@ -83,19 +91,19 @@ document.onkeyup = function (event) {
     if (keyUp == 39) {
         isRightKeyPressed = false;
         if (isLeftKeyPressed) {
-            catPlayer.speed = -catPlayer.maxSpeed;
+            catPlayer.horizontalSpeed = -catPlayer.maxSpeed;
         }
         else {
-            catPlayer.speed = 0;
+            catPlayer.horizontalSpeed = 0;
         }
     }
     else if (keyUp == 37) {
         isLeftKeyPressed = false;
         if (isRightKeyPressed) {
-            catPlayer.speed = catPlayer.maxSpeed;
+            catPlayer.horizontalSpeed = catPlayer.maxSpeed;
         }
         else {
-            catPlayer.speed = 0;
+            catPlayer.horizontalSpeed = 0;
         }
     }
     //END Horizonatal
@@ -104,19 +112,19 @@ document.onkeyup = function (event) {
     else if (keyUp == 38) {
         isUpKeyPressed = false;
         if (isDownKeyPressed) {
-            catPlayer.speed = -catPlayer.maxSpeed;
+            catPlayer.verticalSpeed = catPlayer.maxSpeed;
         }
         else {
-            catPlayer.speed = 0;
+            catPlayer.verticalSpeed = 0;
         }
     }
     else if (keyUp == 40) {
         isDownKeyPressed = false;
         if (isUpKeyPressed) {
-            catPlayer.speed = catPlayer.maxSpeed;
+            catPlayer.verticalSpeed =- catPlayer.maxSpeed;
         }
         else {
-            catPlayer.speed = 0;
+            catPlayer.verticalSpeed = 0;
         }
     }
     //END Vertical
