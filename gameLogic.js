@@ -39,18 +39,39 @@ class GameCharacter {
     }
 }
 
+class GameObject {
+    constructor(x, y, width, height, color) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.color = color;
+    }
+}
+
 /*------Characters-------*/
-var catPlayer = new GameCharacter(60, 300, 30, 30, "rgb(200,100,20)", 0,0);
+var catPlayer = new GameCharacter(60, 300, 30, 30, "rgb(200,100,20)", 0, 0); //orange
+/*--------------------------------*/
+
+/*----------------Objects----------*/
+var table = new GameObject(screenWidth / 2, 300, 100, 20, "rgb(0,0,200)"); //blue
+var tableLegLeft = new GameObject(screenWidth / 2, 320, 10, 60, "rgb(0,0,200");//blue
+var tableLegRight = new GameObject((screenWidth / 2)+90, 320, 10, 60, "rgb(0,0,200");//blue
 /*--------------------------------*/
 
 
 /*------Loading Images to Canvas--------*/
 var draw = function () {
     ctx.clearRect(0, 0, screenWidth, screenHeight);
-    ctx.fillStyle = catPlayer.color;
 
     //Player
+    ctx.fillStyle = catPlayer.color;
     ctx.fillRect(catPlayer.x, catPlayer.y, catPlayer.width, catPlayer.height);
+    //object
+    ctx.fillStyle = table.color;
+    ctx.fillRect(table.x, table.y, table.width, table.height);
+    ctx.fillRect(tableLegLeft.x, tableLegLeft.y, tableLegLeft.width, tableLegLeft.height);
+    ctx.fillRect(tableLegRight.x, tableLegRight.y, tableLegRight.width, tableLegRight.height);
 }
 /*--------------------------------*/
 
@@ -71,7 +92,6 @@ document.onkeydown = function (event) {
     //END Horizonatal
 
     //BEGIN Vertical Direction for Player
-    //NOTE Keep an eye on this cause I wonder if the y-axis is different due to the way the canvas is created
     else if (keyPressed == 38) {
         isUpKeyPressed = true;
         catPlayer.verticalSpeed = -catPlayer.maxSpeed;
