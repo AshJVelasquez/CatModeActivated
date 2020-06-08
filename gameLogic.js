@@ -46,6 +46,41 @@ class GameObject {
         this.width = width;
         this.height = height;
         this.color = color;
+        this.tossedVertically = false;
+        this.tossedHorizontally = false;
+    }
+
+    horizontalMovement() {
+        if (this.tossedHorizontally) {
+            if (catPlayer.horizontalSpeed > 0) {
+                while (this.x<screenWidth-this.width) {
+                    this.x += 3;
+                }
+                this.tossedHorizontally = false;
+            }
+            else if (catPlayer.horizontalSpeed < 0) {
+                while (this.x > 0) {
+                    this.x -= 3;
+                }
+                this.tossedHorizontally = false;
+            }
+        }
+    }
+    verticalMovement() {
+        if (this.tossedVertically) {
+            if (catPlayer.verticalSpeed > 0) {
+                while (this.y > 0) {
+                    this.y -= 3;
+                }
+                this.tossedVertically = false;
+            }
+            else if (catPlayer.verticalSpeed < 0) {
+                while (this.y < screenHeight - this.height) {
+                    this.y += 3;
+                }
+                this.tossedVertically = false;
+            }
+        }
     }
 }
 
@@ -56,7 +91,8 @@ var catPlayer = new GameCharacter(60, 300, 30, 30, "rgb(200,100,20)", 0, 0); //o
 /*----------------Objects----------*/
 var table = new GameObject(screenWidth / 2, 300, 100, 20, "rgb(0,0,200)"); //blue
 var tableLegLeft = new GameObject(screenWidth / 2, 320, 10, 60, "rgb(0,0,200");//blue
-var tableLegRight = new GameObject((screenWidth / 2)+90, 320, 10, 60, "rgb(0,0,200");//blue
+var tableLegRight = new GameObject((screenWidth / 2) + 90, 320, 10, 60, "rgb(0,0,200");//blue
+var vase = new GameObject((screenWidth / 2) + 50, 250, 20, 50, "rgb(0,200,0)"); //green
 /*--------------------------------*/
 
 
@@ -67,11 +103,14 @@ var draw = function () {
     //Player
     ctx.fillStyle = catPlayer.color;
     ctx.fillRect(catPlayer.x, catPlayer.y, catPlayer.width, catPlayer.height);
-    //object
+    //Table
     ctx.fillStyle = table.color;
     ctx.fillRect(table.x, table.y, table.width, table.height);
     ctx.fillRect(tableLegLeft.x, tableLegLeft.y, tableLegLeft.width, tableLegLeft.height);
     ctx.fillRect(tableLegRight.x, tableLegRight.y, tableLegRight.width, tableLegRight.height);
+    //Vase
+    ctx.fillStyle = vase.color;
+    ctx.fillRect(vase.x, vase.y, vase.width, vase.height);
 }
 /*--------------------------------*/
 
@@ -151,11 +190,26 @@ document.onkeyup = function (event) {
 };
 /*--------------------------------*/
 
+/*------------CollisionTest-----------*/
+var checkCollision = function (rect1, rect2) {
+    var xOverLap = Math.abs(rect1.x - rect2.x) <= Math.max(rect1.width, rect2.width);
+    var yOverLap = Math.abs(rect1.y - rect2.y) <= Math.max(rect1.height, rect2.height);
+    return xOverLap && yOverLap;
+}
+/*-----------------------------------*/
+
+/*-------------Cat Attack---------------*/
 var movement = function () {
+    if (checkCollision(catPlayer, vase)) {
+        vase.tossedHorizontally = true;
+        vase.tossedVertically = true;
+        vase.horizontalMovement();
+        vase.verticalMovement();
+    }
     catPlayer.moveHorizontally();
     catPlayer.moveVertically();
-    //IDEA: make separate speeds for vertical and horizontal
 }
+/*-------------------------------------*/
 
 var step = function () {
     movement();
