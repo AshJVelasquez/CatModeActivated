@@ -9,3 +9,29 @@ canvas {
     border:2px solid black;
     background-color: burlywood;
 }
+
+/*Social Media Section*/
+.social {
+	float: left;
+	width:50px;
+	height:auto;
+	margin:8px;
+}
+
+.allSocial {
+	margin-left: 10%;
+	margin-right: 10%;
+	box-sizing: content-box;
+	flex-wrap:wrap;
+	display:flex;
+}
+
+.icon{
+	width:100%;
+	height:auto;
+}
+
+.linkedin {
+	width: 115%;
+	height: auto;
+}
