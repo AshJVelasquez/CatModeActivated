@@ -1,8 +1,8 @@
 # CatModeActivated
  Javascript Game - Become the Cat
 
-See Preview Here:https://codepen.io/ashjvelasquez/pen/BajoBOY
+<b>Play Cat Mode Activated:</b> https://codepen.io/ashjvelasquez/full/BajoBOY
 
-Full Page Preview: https://codepen.io/ashjvelasquez/full/BajoBOY
+<b>Code in Action Here:</b> https://codepen.io/ashjvelasquez/pen/BajoBOY
 
 <img src="https://raw.githubusercontent.com/AshJVelasquez/CatModeActivated/master/images/Preview%20of%20CatModeActivated.png"/>
