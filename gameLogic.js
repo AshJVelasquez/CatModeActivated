@@ -10,6 +10,8 @@ var isLeftKeyPressed = false;
 var isUpKeyPressed = false;
 var isDownKeyPressed = false;
 
+var sprites = {};
+
 class GameCharacter {
     constructor(x, y, width, height, color, verticalSpeed,horizontalSpeed) {
         this.x = x;
@@ -84,6 +86,17 @@ class GameObject {
     }
 }
 
+var loadSprites = function () {
+    sprites.cat = new Image();
+    sprites.cat.src = "images/cat_smoler.png";
+
+    sprites.vase = new Image();
+    sprites.vase.src="images/vase.png"
+
+    sprites.background = new Image();
+    sprites.background.src = "images/background.JPG";
+}
+
 /*------Characters-------*/
 var catPlayer = new GameCharacter(60, 300, 30, 30, "rgb(200,100,20)", 0, 0); //orange
 /*--------------------------------*/
@@ -100,17 +113,22 @@ var vase = new GameObject((screenWidth / 2) + 50, 250, 20, 50, "rgb(0,200,0)"); 
 var draw = function () {
     ctx.clearRect(0, 0, screenWidth, screenHeight);
 
+    //Background
+    ctx.drawImage(sprites.background, 0, 0);
+
     //Player
-    ctx.fillStyle = catPlayer.color;
-    ctx.fillRect(catPlayer.x, catPlayer.y, catPlayer.width, catPlayer.height);
+    ctx.drawImage(sprites.cat, catPlayer.x, catPlayer.y);
+    //ctx.fillStyle = catPlayer.color;
+    //ctx.fillRect(catPlayer.x, catPlayer.y, catPlayer.width, catPlayer.height);
     //Table
     ctx.fillStyle = table.color;
     ctx.fillRect(table.x, table.y, table.width, table.height);
     ctx.fillRect(tableLegLeft.x, tableLegLeft.y, tableLegLeft.width, tableLegLeft.height);
     ctx.fillRect(tableLegRight.x, tableLegRight.y, tableLegRight.width, tableLegRight.height);
     //Vase
-    ctx.fillStyle = vase.color;
-    ctx.fillRect(vase.x, vase.y, vase.width, vase.height);
+    ctx.drawImage(sprites.vase, vase.x, vase.y);
+    //ctx.fillStyle = vase.color;
+    //ctx.fillRect(vase.x, vase.y, vase.width, vase.height);
 }
 /*--------------------------------*/
 
@@ -216,4 +234,5 @@ var step = function () {
     draw();
     window.requestAnimationFrame(step);
 }
+loadSprites();
 step();
