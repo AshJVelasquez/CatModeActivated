@@ -5,4 +5,4 @@
 
 <b>Code in Action Here:</b> https://codepen.io/ashjvelasquez/pen/BajoBOY
 
-<img src="https://raw.githubusercontent.com/AshJVelasquez/CatModeActivated/master/images/Preview%20of%20CatModeActivated.png"/>
+<img src="https://raw.githubusercontent.com/AshJVelasquez/CatModeActivated/master/images/Preview%20of%20CatModeActivated06-21-2020.png"/>
