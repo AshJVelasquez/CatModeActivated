@@ -50,20 +50,22 @@ class GameObject {
         this.color = color;
         this.tossedVertically = false;
         this.tossedHorizontally = false;
+        this.pushMovement = 40;
     }
 
+        //10-18-2020 while loop taken out to create feeling of the cat actually pushing. but now I remember that I kept it in because then the vase can get out of boundary
     horizontalMovement() {
         if (this.tossedHorizontally) {
             if (catPlayer.horizontalSpeed > 0) {
-                while (this.x<screenWidth-this.width) {
-                    this.x += 3;
-                }
+               // while (this.x<screenWidth-this.width) { 
+                    this.x += this.pushMovement; 
+                //}
                 this.tossedHorizontally = false;
             }
             else if (catPlayer.horizontalSpeed < 0) {
-                while (this.x > 0) {
-                    this.x -= 3;
-                }
+                //while (this.x > 0) {
+                    this.x -= this.pushMovement;
+               // }
                 this.tossedHorizontally = false;
             }
         }
@@ -71,15 +73,15 @@ class GameObject {
     verticalMovement() {
         if (this.tossedVertically) {
             if (catPlayer.verticalSpeed > 0) {
-                while (this.y > 0) {
-                    this.y -= 3;
-                }
+                //while (this.y > 0) {
+                    this.y += this.pushMovement;
+               // }
                 this.tossedVertically = false;
             }
             else if (catPlayer.verticalSpeed < 0) {
-                while (this.y < screenHeight - this.height) {
-                    this.y += 3;
-                }
+               // while (this.y < screenHeight - this.height) {
+                    this.y -= this.pushMovement;
+                //}
                 this.tossedVertically = false;
             }
         }
